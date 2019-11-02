@@ -16,7 +16,7 @@ func main() {
 
 	serverURL := os.Getenv("URL")
 	port := os.Getenv("PORT")
-	if server_url == "" {
+	if serverURL == "" {
 		log.Fatal("server url is not provided")
 	}
 
@@ -29,10 +29,7 @@ func main() {
 
 
 	hookURL := fmt.Sprintf("%s:%s/%s", serverURL, port, token)
-	_, err := tgbotapi.NewWebhook(hookURL)
-	if err != nil {
-		log.Fatal("error while setting web hook: ", err)
-	}
+	tgbotapi.NewWebhook(hookURL)
 	
 	updates := bot.ListenForWebhook("/" + token)
 	go http.ListenAndServe(":" + port, nil)
